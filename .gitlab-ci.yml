@@ -1,0 +1,45 @@
+image: docker:latest
+
+stages:
+  - build
+  - deploy
+
+build-develop:
+  stage: build
+  image: docker
+
+  services:
+    - docker:dind
+  before_script:
+    - docker info
+  script:
+    - echo "Building the Nuxt app for Production 🎱"
+    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
+    - docker build . -t $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG
+      -t $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
+    - docker push $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
+    - docker push $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG
+  only:
+    - develop
+  environment:
+    name: develop
+
+deploy develop:
+  stage: deploy
+  image:
+    name: bitnami/kubectl
+    entrypoint: [""]
+  variables:
+    IMAGE_TAG: $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
+  script:
+    - echo "Running Kubernetes 🚢"
+    - kubectl create secret docker-registry gitlab-registry --docker-server="$CI_REGISTRY" --docker-username="$CI_DEPLOY_USER" --docker-password="$CI_DEPLOY_PASSWORD" --docker-email="$GITLAB_USER_EMAIL" -o yaml --dry-run=client | kubectl apply -f -
+    - cat docker/k8s/00-deployments.yaml | sed "s#\${IMAGE_TAG}#$IMAGE_TAG#g" | kubectl apply -f -
+    - kubectl apply -f docker/k8s/01-services.yaml
+    - cat docker/k8s/02-ingress.yaml | sed "s#\${SITE_URL}#soprole-cp-dev.notus.cl#g" | kubectl apply -f -
+  only:
+    - develop
+  when: manual
+  environment:
+    name: develop
+    url: https://soprole-cp-dev.notus.cl
