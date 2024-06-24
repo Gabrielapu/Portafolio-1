@@ -1,13 +1,13 @@
 <template>
   <div>
     <v-list nav>
-      <v-img
+      <!-- <v-img
         v-if="logoSideBar"
         :aspect-ratio="41/10"
         :src="require('/static/Logo.png')"
         class="img-logo mb-3 ml-2 mt-0"
         @click="$router.push({ path: '/'})"
-      ></v-img>
+      ></v-img> -->
       <v-list-item-subtitle class="nav-title">Navegación</v-list-item-subtitle>
     </v-list>
     <v-list nav class="nav-items" dense>

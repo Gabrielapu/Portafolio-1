@@ -9,7 +9,7 @@
     style="border-bottom: 1px solid #d2d2d2 !important;"
   >
     <v-app-bar-nav-icon @click="goBack()"><v-icon>mdi-arrow-left</v-icon></v-app-bar-nav-icon>
-    <v-img
+    <!-- <v-img
       :aspect-ratio="41/10"
       :src="require('/static/Logo.png')"
       contain
@@ -17,7 +17,7 @@
       max-width="164"
       class="cursor-pointer"
       @click="$router.push({ path: '/'})"
-    ></v-img>
+    ></v-img> -->
 
     <v-spacer></v-spacer>
 

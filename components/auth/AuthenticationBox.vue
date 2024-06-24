@@ -2,7 +2,7 @@
   <v-container fluid fill-height class="d-flex justify-center align-center flex-column">
     <v-card class="elevation-5 px-15" width="600px" height="550px" color="#FAFAFA">
       <v-card-title class="d-flex justify-center flex-column my-10">
-        <v-img :src="require('/static/Logo.png')" max-height="40" max-width="164" />
+        <!-- <v-img :src="require('/static/Logo.png')" max-height="40" max-width="164" /> -->
         <div class="d-flex flex-column align-center">
           <h1 class="text-h5 mt-4"> {{form.title}} </h1>
           <span class="body-2 mt-2 text-center"> {{form.subtitle}} </span>
