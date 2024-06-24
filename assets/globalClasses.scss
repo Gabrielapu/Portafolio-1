@@ -1,0 +1,38 @@
+.cursor-pointer {
+  cursor: pointer;
+}
+.cursor-default {
+  cursor: default;
+}
+// Aplica borde derecho al sidebar.
+.v-navigation-drawer__border{
+  width: 1.5px !important;
+}
+// Aplica scroll en sentido vertical
+.scroll-y {
+  overflow-y: scroll;
+}
+// Aplica un borde gris
+.border-bottom {
+  border-bottom: 1px solid rgb(207, 207, 207) !important;
+  border-radius: 0 !important;
+}
+// Aplica un borde delgado
+.outlined {
+  border: 1px solid rgb(224, 224, 224);
+}
+// Alinea elemento a ala izquierda
+.text-left {
+  margin-left: auto;
+}
+// Aplica un borde redondeado
+.border-radius-5 {
+  border-radius: 5px !important;
+}
+// Alinea los tabs verticales a la izquierda
+.v-tabs--vertical > .v-tabs-bar .v-tabs-bar__content {
+  align-items: flex-start;
+}
+.fit-content {
+  width: 10px;
+}

@@ -1,0 +1,34 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sop-cp
+  labels:
+    app: sop-cp-web
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sop-cp-web
+  template:
+    metadata:
+      labels:
+        app: sop-cp-web
+    spec:
+      containers:
+        - image: ${IMAGE_TAG}
+          name: sop-cp
+          envFrom:
+          - secretRef:
+              name: sop-cp-envs
+          ports:
+            - containerPort: 3000
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "125m"
+            limits:
+              memory: "1Gi"
+              cpu: "1000m"
+      imagePullSecrets:
+      - name: gitlab-registry
